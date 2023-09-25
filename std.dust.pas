@@ -5,36 +5,44 @@ uses
   Generics.Collections;
 
 type
- OptionKind = (Some, None);
+  OptionKind = (Some, None);
 
- Option<T> = record
+  Option<T> = record
+  private
+    FValue: T;
     HasValue: Boolean;
-    Value: T;
+  public
+    property Value: T read FValue;
     function Match: OptionKind;
-    {$REGION 'constructor'}
+  {$REGION 'constructor'}
     constructor Create(AValue: T);
     procedure HasNoValue;
-    {$ENDREGION}
- end;
+{$ENDREGION}
+  end;
 
- ResultKind = (Ok, Err);
+  ResultKind = (Ok, Err);
 
- Result<T, E> = record
-    Value: T;
-    Err: E;
+  Result<T, E> = record
+  private
+    FValue: T;
+    FErr: E;
     IsValid: Boolean;
+  public
+    property Value: T read FValue;
+    property Err: E read FErr;
     function Match: ResultKind;
-    {$REGION 'constructor'}
+  {$REGION 'constructor'}
     constructor Create(AValue: T); overload;
     constructor Create(AError: E); overload;
-    {$ENDREGION}
- end;
+{$ENDREGION}
+  end;
 
 implementation
+
 { Option<T> }
 constructor Option<T>.Create(AValue: T);
 begin
-  Value := AValue;
+  FValue := AValue;
   HasValue := true;
 end;
 procedure Option<T>.HasNoValue;
@@ -48,15 +56,16 @@ begin
   else
     Result := OptionKind.None;
 end;
+
 { Result<T, E> }
 constructor Result<T, E>.Create(AValue: T);
 begin
-  Value := AValue;
+  FValue := AValue;
   IsValid := True;
 end;
 constructor Result<T, E>.Create(AError: E);
 begin
-  Err := AError;
+  FErr := AError;
   IsValid := False;
 end;
 function Result<T, E>.Match: ResultKind;
