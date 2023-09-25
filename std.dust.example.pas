@@ -20,7 +20,7 @@ uses
 type
 
   TaskRepository = class
-     class function Load(Date: TDatetime): Option<String>;
+     class function Load(Date: TDate): Option<String>;
   end;
   TFileRepository = class
      class function OpenAsString(Filename: TFilename): Result<String, Exception>;
@@ -87,9 +87,9 @@ end;
 
 { TaskRepository }
 
-class function TaskRepository.Load(Date: TDatetime): Option<String>;
+class function TaskRepository.Load(Date: TDate): Option<String>;
 begin
-  case Trunc(Date) mod 7 of
+  case Date mod 7 of
     0, 1: Result.HasNoValue //Sat, Mon has no tasks
     else Result.Create('You have a lot of work today')
   end;
