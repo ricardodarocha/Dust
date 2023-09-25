@@ -19,7 +19,7 @@ var today := now();
 task := TaskRepository.Load(today);
   case task.match
     Some: Showmessage('That is for today: ' + task.value)
-    else continue
+    else Showmessage('Take a day off')
   end;
 ```
 
