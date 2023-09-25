@@ -5,7 +5,7 @@ This is a very single interpretation of how things should be. Be free and keep y
 
 ## How to use
 
-```Delphi
+```Pascal
 uses std.dust;
 
 var task: Option<String>;
@@ -14,7 +14,7 @@ var content: Result<String, Exception>;
 
 ## Practical example
 
-```Delphi
+```Pascal
 var today := now();
 task := TaskRepository.Load(today);
   case task.match
@@ -23,7 +23,7 @@ task := TaskRepository.Load(today);
   end;
 ```
 
-```Delphi
+```Pascal
 const
   filename = '/InvalidFilename.pdf';
 
