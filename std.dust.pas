@@ -12,7 +12,7 @@ type
     Value: T;
     function Match: OptionKind;
     {$REGION 'constructor'}
-    constructor Create(AValue: T); overload;
+    constructor Create(AValue: T);
     procedure HasNoValue;
     {$ENDREGION}
  end;
