@@ -9,26 +9,27 @@ This is a very single interpretation of how things should be. Be free and keep y
 uses std.dust;
 
 var task: Option<String>;
-var file: Result<String, Exception>;
+var content: Result<String, Exception>;
 ```
 
 ## Practical example
 
 ```rust
 var today := now();
-var tasks := TaskRepository.Load(today);
-for task in tasks do
+task := TaskRepository.Load(today);
   case task.match
-    Some: Showmessage('That is for today: ' + task.value),
+    Some: Showmessage('That is for today: ' + task.value)
     else continue
   end;
 ```
 
 ```rust
-var filename := '/AnInvalidFilename.pdf';
-var file := TSafeFile.OpenAsString();
-case file.match
-  Ok: Showmessage('That is the file content: ' + file.value),
-  Err: Showmessage('That was not good, look: ' + file.err.message),
+const
+  filename = '/InvalidFilename.pdf';
+
+content := TFileRepository.OpenAsString(filename);
+case content.match of
+  Ok: Showmessage('That is the file content: ' + content.value);
+  Err: Showmessage('That was not good, look: ' + content.err.message)
 end;
 ```
