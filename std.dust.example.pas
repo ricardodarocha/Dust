@@ -64,7 +64,7 @@ var
   Value: Option<String>;
 begin
   Value.Create('Yeah. It works!');
-//  r.HasNoValue;
+//  Value.HasNoValue;
   case Value.Match of
     Some: caption := Value.Value
     else caption := 'Oh no!';
